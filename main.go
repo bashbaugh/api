@@ -2,7 +2,6 @@ package main
 
 import (
 	// "net/http"
-
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -14,11 +13,19 @@ func main() {
 	godotenv.Load()
 
 	r := gin.Default()
+
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
 	})
+
+	r.GET("/now", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"taskName": getCurrentTogglEntry().Description,
+		})
+	})
+
 	r.Run("0.0.0.0:4000")
 }
 
