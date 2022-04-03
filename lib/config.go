@@ -3,6 +3,8 @@ package lib
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"os"
 )
 
@@ -14,6 +16,14 @@ type Config struct {
 
 func LoadConfig() *Config {
 	fmt.Println(os.Getwd())
+	files, err := ioutil.ReadDir("./")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, f := range files {
+		fmt.Println(f.Name())
+	}
 	file, err := os.Open("../config.json")
 
 	if err != nil {
