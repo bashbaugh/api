@@ -1,12 +1,30 @@
 {
   "toggl": {
     "projects": {
-      "165952496": "Coding",
-      "180720741": "Freelancing",
-      "178215944": "Hack Lab",
-      "178216606": "Homework",
-      "165692044": "Learning",
-      "178265934": "MAHacks"
+      "165952496": {
+        "name": "Coding",
+        "description": "coding"
+      },
+      "180720741": {
+        "name": "Freelancing",
+        "description": "freelancing"
+      },
+      "178215944": {
+        "name": "Hack Lab",
+        "description": "building the Hack Lab"
+      },
+      "178216606": {
+        "name": "Homeworm",
+        "description": "doing homework"
+      },
+      "165692044": {
+        "name": "Learning",
+        "description": "learning"
+      },
+      "178265934": {
+        "name": "MAHacks",
+        "description": "Planning MAHacks"
+      }
     }
   }
 }

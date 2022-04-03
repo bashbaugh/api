@@ -8,7 +8,10 @@ import (
 
 type Config struct {
 	Toggl struct {
-		Projects map[string]string `json:"projects"`
+		Projects map[string]struct {
+			Name        string `json:"name"`
+			Description string `json:"description"`
+		} `json:"projects"`
 	} `json:"toggl"`
 }
 

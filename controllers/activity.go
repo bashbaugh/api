@@ -13,13 +13,14 @@ var config = lib.LoadConfig()
 
 func GetCurrentActivity(c *gin.Context) {
 	entry := getCurrentTogglEntry()
-	name := config.Toggl.Projects[strconv.Itoa(entry.Pid)]
+	proj := config.Toggl.Projects[strconv.Itoa(entry.Pid)]
 
 	isTracking := entry.ID != 0
 
 	c.JSON(200, gin.H{
-		"trackingTime": isTracking,
-		"activityName": name,
+		"trackingTime":        isTracking,
+		"activityName":        proj.Name,
+		"activityDescription": proj.Description,
 	})
 }
 
