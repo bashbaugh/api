@@ -1,2 +1,3 @@
 # bash-api
-api for my life (call that a bpi)
+
+API consumed by some of my websites and personal projects
