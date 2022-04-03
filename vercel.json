@@ -5,5 +5,10 @@
       "destination": "https://github.com/bashbaugh/api", 
       "permanent": false
     }
-  ]
+  ],
+  "functions": {
+    "api/activity/current.go": {
+      "includeFiles": "config.json"
+    }
+  }
 }
