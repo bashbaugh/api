@@ -36,6 +36,7 @@ func main() {
 	})
 
 	r.GET("/now", controllers.GetCurrentActivity)
+	r.GET("/music", controllers.GetCurrentSong)
 
 	port := os.Getenv("PORT")
 	if port == "" {
