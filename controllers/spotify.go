@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"os"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,7 +27,7 @@ func GetCurrentSong(c *gin.Context) {
 	client := &http.Client{}
 
 	req, err := http.NewRequest("GET", "https://api.spotify.com/v1/me/player/currently-playing", nil)
-	req.Header.Set("Authorization", "Bearer "+os.Getenv("SPOTIFY_OAUTH_TOKEN"))
+	req.Header.Set("Authorization", "Bearer "+GetSpotifyAccessToken())
 
 	response, err := client.Do(req)
 
@@ -41,11 +43,36 @@ func GetCurrentSong(c *gin.Context) {
 	var data SpotifyCurrentSongResponse
 	decoder.Decode(&data)
 
-	fmt.Println(data)
-
 	c.JSON(200, gin.H{
 		"isPlaying":  data.IsPlaying,
 		"songName":   data.Item.Name,
 		"artistName": data.Item.Album.Artists[0].Name,
 	})
+}
+
+func GetSpotifyAccessToken() string {
+	client := &http.Client{}
+
+	formData := url.Values{
+		"grant_type":    {"refresh_token"},
+		"refresh_token": {os.Getenv("SPOTIFY_REFRESH_TOKEN")},
+	}
+
+	req, err := http.NewRequest("POST", "https://accounts.spotify.com/api/token", strings.NewReader(formData.Encode()))
+	req.Header.Set("Authorization", "Basic "+os.Getenv("SPOTIFY_AUTH_HEADER_VAL_BASE64"))
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+	response, err := client.Do(req)
+
+	if err != nil {
+		fmt.Print(err.Error())
+	}
+
+	decoder := json.NewDecoder(response.Body)
+	var tokenData struct {
+		AccessToken string `json:"access_token"`
+	}
+	decoder.Decode(&tokenData)
+
+	return tokenData.AccessToken
 }
