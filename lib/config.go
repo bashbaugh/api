@@ -14,7 +14,7 @@ type Config struct {
 
 func LoadConfig() *Config {
 	fmt.Println(os.Getwd())
-	file, err := os.Open("config.json")
+	file, err := os.Open("../config.json")
 
 	if err != nil {
 		fmt.Println(err)
