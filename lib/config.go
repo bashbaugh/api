@@ -16,7 +16,7 @@ type Config struct {
 
 func LoadConfig() *Config {
 	fmt.Println(os.Getwd())
-	files, err := ioutil.ReadDir("./")
+	files, err := ioutil.ReadDir("../")
 	if err != nil {
 		log.Fatal(err)
 	}
