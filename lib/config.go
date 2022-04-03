@@ -13,7 +13,7 @@ type Config struct {
 }
 
 func LoadConfig() *Config {
-	file, err := os.Open("../config.json")
+	file, err := os.Open("config.json")
 
 	if err != nil {
 		fmt.Println(err)
